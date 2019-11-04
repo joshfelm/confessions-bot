@@ -20,12 +20,18 @@ twitter = Twython(
     access_token_secret
 )
 
-def tweetout(message):
+def tweetout(message, id):
     while not internet_on():
         print("waiting for internet connection (time out 1 min)")
-        sleep(60)
-    twitter.update_status(status=message)
+        sleep(600)
+    twitter.update_status(status='#bottruths' + str(int(id)) + '\n' + message)
     print("Tweeted: " + message)
+    id += 1
+    sav = []
+    sav.append(id)
+    np.savetxt('id_data.dat', sav)
+    del tweets[0]
+    updateQueue(tweets)
 
 def updateQueue(tweets):
     f = open("./queued-posts.txt", "w+")
@@ -56,25 +62,15 @@ for l in lines.split('\n'):
 print("Do you want to upload a tweet straight away? (default is n)")
 r = str(input()).lower()
 if r == 'y':
-    tweetout('#bottruths' + str(int(id)) + '\n' + tweets[0])
-    id += 1
-    sav = []
-    sav.append(id)
-    np.savetxt('id_data.dat', sav)
-    del tweets[0]
-    updateQueue(tweets)
+    tweetout(tweets[0],id)
 
 # sleep till the nearest hour
 sleep(60*(60-datetime.datetime.now().minute))
 
 # Enter tweet loop
 while True:
-    tweetout('#bottruths' + str(id) + '\n' + tweets[0])
-    id += 1
-    np.savetxt('id_data.dat', id)
-    del tweets[0]
-    updateQueue(tweets)
-    if len(tweets < 10):
+    tweetout(tweets[0],id)
+    if len(tweets) < 10:
         print("---WARNING: <10 tweets queued---")
     # sleep for an hour
     sleep(60*60)
