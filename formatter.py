@@ -1,4 +1,6 @@
 import glob, os
+import re
+from os import path
 
 for file in glob.glob("./gentext/gentext*.txt"):
     temp = str(file).split('/')
@@ -43,6 +45,20 @@ for file in glob.glob("./gentext/gentext*.txt"):
                 lines.append(l)
         f.close()
         f=open("./gentext/fixed_" + filename + ".txt","w+")
+        print("From file " + filename)
+        print("Choose posts to add to queue with y (default is n)")
+        print("Type c to process another time")
+        quit = False
+        queue=open("./twitter-api/queued-posts.txt","a+")
         for l in lines:
             f.write(l)
+            if not quit:
+                print(l)
+                response = str(input())
+                response.lower()
+                if response == 'y':
+                    queue.write(l)
+                if response == 'c':
+                    quit = True
         f.close()
+        queue.close()
