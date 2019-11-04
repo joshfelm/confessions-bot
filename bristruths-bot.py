@@ -18,44 +18,45 @@ filelist = []
 for file in glob.glob("./posts/*.txt"):
     filelist.append(file)
 
+# for file in glob.glob("./posts/archive/*.txt"):
+#     filelist.append(file)
+
 texts = []
 
-# websites = ['bristruths','cardiffessions','ExeHonestly','durfess','uobbrumfess','Yorfessions','leedsfess','oxfess','camfession','sheffessions','Swanfess','Newfession','SurFess','TrUWEBristol','readingfess']
-# regStr = ['^#Bristruth*','^#CardiffConfession*','^#ExeHonestly*','^#Durfess*','^#Brumfess*','^#Yorfessions*','^#LeedsFess*','^#Oxfess*','^#Camfession*','^#Sheffession*','^#Swanfess*','^#Newfess*','^#SurFess','^#TrUWE*','^#ReadingFess*']
+websites = ['bristruths','cardiffessions','ExeHonestly','durfess','uobbrumfess','Yorfessions','leedsfess','oxfess','camfession','sheffessions','Swanfess','Newfession','SurFess','TrUWEBristol','readingfess']
+regStr = ['^#Bristruth*','^#CardiffConfession*','^#ExeHonestly*','^#Durfess*','^#Brumfess*','^#Yorfessions*','^#LeedsFess*','^#Oxfess*','^#Camfession*','^#Sheffession*','^#Swanfess*','^#Newfess*','^#SurFess','^#TrUWE*','^#ReadingFess*']
 
-websites = ['readingfess']
-regStr = ['^#ReadingFess*']
 
-w = 0
-for website in websites:
-    i = 0
-    print("Searching for new " + website + "...")
-    # gather posts from bristruths
-    posts = get_posts(website,pages=1000,credentials=('josh99@gmx.de','SpHeRiCaL4477'))
-    for post in get_posts(website,pages=1000,credentials=('josh99@gmx.de','SpHeRiCaL4477')):
-        if i < 3000:
-            try:
-                words = post['text'].split()
-                if len(words) > 0:
-                    x = re.search(regStr[w], words[0])
-                    if x != None:
-                        filename = post['text'].splitlines()[0][1:] + ".txt"
-                        if not(path.exists("./posts/" + filename)):
-                            f=open("./posts/"+ filename,"w+")
-                            amendpost = post['text'].splitlines()[1]
-                            f.write(amendpost)
-                            f.close()
-                            i+=1
-                            texts.append(amendpost)
-                            print(filename + " added!")
-                        # else:
-                        #     print(filename + " already exists")
-                    else:
-                        print("err, post cannot be read")
-            except:
-                print("error caught")
-    print("Added " + str(i) + " new posts.")
-    w += 1
+# w = 0
+# for website in websites:
+#     i = 0
+#     print("Searching for new " + website + "...")
+#     # gather posts from bristruths
+#     posts = get_posts(website,pages=100,credentials=('josh99@gmx.de','SpHeRiCaL4477'))
+#     for post in get_posts(website,pages=1000,credentials=('josh99@gmx.de','SpHeRiCaL4477')):
+#         if i < 3000:
+#             try:
+#                 words = post['text'].split()
+#                 if len(words) > 0:
+#                     x = re.search(regStr[w], words[0])
+#                     if x != None:
+#                         filename = post['text'].splitlines()[0][1:] + ".txt"
+#                         if not(path.exists("./posts/archive/" + filename)):
+#                             f=open("./posts/"+ filename,"w+")
+#                             amendpost = post['text'].splitlines()[1]
+#                             f.write(amendpost)
+#                             f.close()
+#                             i+=1
+#                             texts.append(amendpost)
+#                             print(filename + " added!")
+#                         # else:
+#                         #     print(filename + " already exists")
+#                     else:
+#                         print("err, post cannot be read")
+#             except:
+#                 print("error caught")
+#     print("Added " + str(i) + " new posts.")
+#     w += 1
 
 for f in filelist:
     fileop=open(f, "r")
@@ -64,11 +65,11 @@ for f in filelist:
 
 # train network
 model_name = 'bristruths-bot_word'
-textgen = textgenrnn(name=model_name)
+# textgen = textgenrnn(name=model_name)
 
-# textgen = textgenrnn(weights_path='./bristruths bot_weights.hdf5',
-#                        vocab_path='./bristruths bot_vocab.json',
-#                        config_path='./bristruths bot_config.json')
+textgen = textgenrnn(weights_path='./bot-config/bristruths-bot_word_weights.hdf5',
+                       vocab_path='./bot-config/bristruths-bot_word_vocab.json',
+                       config_path='./bot-config/bristruths-bot_word_config.json')
 
 model_cfg = {
     'rnn_size': 128,
@@ -112,26 +113,26 @@ train_cfg = {
     'is_csv': False   # set to True if file is a CSV exported from Excel/BigQuery/pandas
 }
 
-train_function(
-    texts=texts,
-    new_model=False,        # Change this to true to retrain model from scratch
-    num_epochs=train_cfg['num_epochs'],
-    gen_epochs=train_cfg['gen_epochs'],
-    batch_size=1024,
-    train_size=train_cfg['train_size'],
-    dropout=train_cfg['dropout'],
-    validation=train_cfg['validation'],
-    is_csv=train_cfg['is_csv'],
-    rnn_layers=model_cfg['rnn_layers'],
-    rnn_size=model_cfg['rnn_size'],
-    rnn_bidirectional=model_cfg['rnn_bidirectional'],
-    max_length=model_cfg['max_length'],
-    dim_embeddings=100,
-    word_level=model_cfg['word_level'])
+# train_function(
+#     texts=texts,
+#     new_model=False,        # Change this to true to retrain model from scratch
+#     num_epochs=train_cfg['num_epochs'],
+#     gen_epochs=train_cfg['gen_epochs'],
+#     batch_size=1024,
+#     train_size=train_cfg['train_size'],
+#     dropout=train_cfg['dropout'],
+#     validation=train_cfg['validation'],
+#     is_csv=train_cfg['is_csv'],
+#     rnn_layers=model_cfg['rnn_layers'],
+#     rnn_size=model_cfg['rnn_size'],
+#     rnn_bidirectional=model_cfg['rnn_bidirectional'],
+#     max_length=model_cfg['max_length'],
+#     dim_embeddings=100,
+#     word_level=model_cfg['word_level'])
 
 # this temperature schedule cycles between 1 very unexpected token, 1 unexpected token, 2 expected tokens, repeat.
 # changing the temperature schedule can result in wildly different output!
-temperature = [1.0, 0.2, 0.5, 1.0, 0.5, 0.2]   
+temperature = [1.0, 0.5, 0.2, 0.7, 0.2, 0.2, 0.5]   
 prefix = '\n'   # if you want each generated text to start with a given seed text
 
 if train_cfg['line_delimited']:
@@ -141,7 +142,7 @@ else:
   n = 100
   max_gen_length = 50 if model_cfg['word_level'] else 280  # max length = lenght of tweet
   
-gen_file = 'gentext-'+str(date.today())+'.txt'
+gen_file = './gentext/gentext-'+str(date.today())+'.txt'
 
 print("generating texts")
 textgen.generate_to_file(gen_file,
