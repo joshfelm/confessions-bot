@@ -23,7 +23,7 @@ twitter = Twython(
 def tweetout(message, id):
     while not internet_on():
         print("waiting for internet connection (time out 1 min)")
-        sleep(600)
+        sleep(60)
     twitter.update_status(status='#bottruths' + str(int(id)) + '\n' + message)
     print("Tweeted: " + message)
     id += 1
@@ -41,7 +41,9 @@ def updateQueue(tweets):
 
 def internet_on():
     try:
+        print("testing connection")
         urlopen('http://216.58.192.142', timeout=1)
+        print("connection ok")
         return True
     except urllib.error.URLError as err: 
         return False
@@ -59,19 +61,17 @@ for l in lines.split('\n'):
     tweets.append(l)
 
 # upload tweet (be careful that not more than an hour has elapsed)
-print("Do you want to upload a tweet straight away? (default is n)")
-r = str(input()).lower()
-if r == 'y':
-    tweetout(tweets[0],id)
-
+# print("Do you want to upload a tweet straight away? (default is n)")
+# r = str(input()).lower()
+# if r == 'y':
+tweetout(tweets[0],id)
+if len(tweets) < 10:
+    print("---WARNING: <10 tweets queued---")
 # sleep till the nearest hour
-sleep(60*(60-datetime.datetime.now().minute))
+# sleep(60*(60-datetime.datetime.now().minute))
 
-# Enter tweet loop
-while True:
-    tweetout(tweets[0],id)
-    if len(tweets) < 10:
-        print("---WARNING: <10 tweets queued---")
-    # sleep for an hour
-    sleep(60*60)
-
+# # Enter tweet loop
+# while True:
+#     tweetout(tweets[0],id)
+#     # sleep for an hour
+#     sleep(60*60)
