@@ -1,4 +1,3 @@
 /posts/*
-queued-posts.txt
 /twitter-api/auth.py
 /gentext/*
