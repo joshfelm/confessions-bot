@@ -5,6 +5,8 @@ import datetime
 import urllib
 from urllib.error import URLError
 from urllib.request import urlopen
+from notify_run import Notify
+
 
 from auth import (
     consumer_key,
@@ -61,18 +63,8 @@ twitter = Twython(
 # for l in lines.split('\n'):
 #     tweets.append(l)
 
-event_data = {
-    'event': {
-            'type': 'message_create',
-            'message_create': {
-                    'target': {'recipient_id': 1064505913430687744,},
-                    'message_data': {
-                            'text': "hello nerd",
-                    }
-            }
-    }
-}
-
+notify = Notify()
+notify.send('virgin alert')
 
 # upload tweet (be careful that not more than an hour has elapsed)
 # tweetout(tweets[0],id)
@@ -80,4 +72,3 @@ event_data = {
 #     print("---WARNING: <10 tweets queued---")
 
 # send a message
-event = twitter.send_direct_message(**event)
