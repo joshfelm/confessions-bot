@@ -64,7 +64,7 @@ twitter = Twython(
 #     tweets.append(l)
 
 notify = Notify()
-notify.send('virgin alert')
+notify.send('suh (from the pi)')
 
 # upload tweet (be careful that not more than an hour has elapsed)
 # tweetout(tweets[0],id)
