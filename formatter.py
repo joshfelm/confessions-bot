@@ -64,3 +64,4 @@ for file in glob.glob("./gentext/gentext*.txt"):
                     quit = True
         f.close()
         queue.close()
+print("Done. DONT FORGET TO COMMIT AND PUSH CHANGES")
