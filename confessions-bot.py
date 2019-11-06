@@ -78,6 +78,7 @@ train_cfg = {
     'is_csv': False   # set to True if file is a CSV exported from Excel/BigQuery/pandas
 }
 
+# The train function (comment this out if you don't want to train and only generate text)
 # train_function(
 #     texts=texts,
 #     new_model=False,        # Change this to true to retrain model from scratch
@@ -107,7 +108,7 @@ else:
   n = 100
   max_gen_length = 50 if model_cfg['word_level'] else 280  # max length = lenght of tweet
   
-gen_file = './gentext/gentext-'+str(date.today())+'.txt'
+gen_file = './gentext/gentext-'+str(datetime.datetime.now())+'.txt'
 
 print("generating texts")
 textgen.generate_to_file(gen_file,

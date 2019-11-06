@@ -44,7 +44,17 @@ for file in glob.glob("./gentext/gentext*.txt"):
                                     if l[i+2].isalpha():
                                         l = l[:i+2] + l[i+2].upper() + l[i+3:]
                     i += 1
-                lines.append(l)
+                queue=open("./twitter-api/queued-posts.txt","r")
+                same = False
+                if queue.mode == "r":
+                    qlines = queue.readlines()
+                    for ql in qlines:
+                        if ql == l:
+                            same = True
+                if not same:
+                    lines.append(l)
+                else:
+                    print("duplicate captured: " + l)
         f.close()
         f=open("./gentext/fixed_" + filename + ".txt","w+")
         print("From file " + filename)
