@@ -5,6 +5,7 @@ import datetime
 import urllib
 from urllib.error import URLError
 from urllib.request import urlopen
+from notify_run import Notify
 
 from auth import (
     consumer_key,
@@ -20,6 +21,7 @@ twitter = Twython(
     access_token_secret
 )
 
+# Tweet function
 def tweetout(message, id):
     while not internet_on():
         print("waiting for internet connection (time out 1 min)")
@@ -33,12 +35,14 @@ def tweetout(message, id):
     del tweets[0]
     updateQueue(tweets)
 
+# Updates the queue
 def updateQueue(tweets):
     f = open("./queued-posts.txt", "w+")
     for t in tweets:
         f.write(t+'\n')
     f.close()
 
+# Check connection function
 def internet_on():
     try:
         print("testing connection")
@@ -52,6 +56,7 @@ def internet_on():
 id = (np.loadtxt('id_data.dat'))
 
 tweets = []
+
 # load queued tweets
 f = open('./queued-posts.txt', "r")
 if f.mode == "r":
@@ -61,17 +66,8 @@ for l in lines.split('\n'):
     tweets.append(l)
 
 # upload tweet (be careful that not more than an hour has elapsed)
-# print("Do you want to upload a tweet straight away? (default is n)")
-# r = str(input()).lower()
-# if r == 'y':
 tweetout(tweets[0],id)
-if len(tweets) < 10:
-    print("---WARNING: <10 tweets queued---")
-# sleep till the nearest hour
-# sleep(60*(60-datetime.datetime.now().minute))
 
-# # Enter tweet loop
-# while True:
-#     tweetout(tweets[0],id)
-#     # sleep for an hour
-#     sleep(60*60)
+# Check remaining tweets and notify if tweets are low
+if len(tweets) < 10:
+    notify.send("Warning, only " + len(tweets) + " left in queue")
