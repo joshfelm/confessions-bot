@@ -1,11 +1,10 @@
-# from twython import Twython
-# import numpy as np
-# from time import sleep
-# import datetime
-# import urllib
-# from urllib.error import URLError
-# from urllib.request import urlopen
-import twitter
+from twython import Twython, TwythonError
+import numpy as np
+from time import sleep
+import datetime
+import urllib
+from urllib.error import URLError
+from urllib.request import urlopen
 
 from auth import (
     consumer_key,
@@ -14,18 +13,13 @@ from auth import (
     access_token_secret
 )
 
-api = twitter.Api(
-    consumer_key=consumer_key,
-    consumer_secret=consumer_secret,
-    access_token_key=access_token_key,
-    access_token_secret=access_token_secret
+
+twitter = Twython(
+    consumer_key,
+    consumer_secret,
+    access_token,
+    access_token_secret
 )
-# twitter = Twython(
-#     consumer_key,
-#     consumer_secret,
-#     access_token,
-#     access_token_secret
-# )
 
 # def tweetout(message, id):
 #     while not internet_on():
@@ -66,7 +60,19 @@ api = twitter.Api(
 
 # for l in lines.split('\n'):
 #     tweets.append(l)
-twitter_handle='@fxlmo_'
+
+event_data = {
+    'event': {
+            'type': 'message_create',
+            'message_create': {
+                    'target': {'recipient_id': 1064505913430687744,},
+                    'message_data': {
+                            'text': "hello nerd",
+                    }
+            }
+    }
+}
+
 
 # upload tweet (be careful that not more than an hour has elapsed)
 # tweetout(tweets[0],id)
@@ -74,4 +80,4 @@ twitter_handle='@fxlmo_'
 #     print("---WARNING: <10 tweets queued---")
 
 # send a message
-send_msg = api.PostDirectMessage(msg, user_id=None, screen_name=twitter_handle)
+event = twitter.send_direct_message(**event_data)
