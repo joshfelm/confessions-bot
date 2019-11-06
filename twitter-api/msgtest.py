@@ -80,4 +80,4 @@ event_data = {
 #     print("---WARNING: <10 tweets queued---")
 
 # send a message
-event = twitter.send_direct_message(**event_data)
+event = twitter.send_direct_message(**event)
