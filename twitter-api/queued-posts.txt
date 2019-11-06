@@ -1,4 +1,3 @@
-People who don 't like mayonaise don 't deserve a degree.
 Shout out to the guy in the Mike mask at triple cooked last night who just stood in the middle of the floor. I maybe stop talking to you. I love you all.
 I really want to join the gym but I don 't know how to tell them but I 'm going to start a uni society next year...
 It 's now been a month since I moved out of uni
@@ -70,6 +69,7 @@ Calling all fit boys
 
 
 
+<<<<<<< HEAD
 Voting for labour lib - dem more first.
 One of my flatmates pisses more around the toilet roll so you could walk down.
 How do I tell my best friend that I 'm seeing he 's from hatfield...
@@ -99,3 +99,7 @@ I ’ m gonna miss my housemate ’ s revision group. Didn ’ t have the same m
 I 'm a fresher and I 've heard loads of people I hate....
 Listening to the news like wtf is a 🤷
 Finding it tricky
+||||||| merged common ancestors
+=======
+
+>>>>>>> refs/remotes/origin/master
