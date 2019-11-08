@@ -63,7 +63,8 @@ if f.mode == "r":
     lines = f.read()
 
 for l in lines.split('\n'):
-    tweets.append(l)
+    if l != "":
+        tweets.append(l)
 
 # upload tweet (be careful that not more than an hour has elapsed)
 tweetout(tweets[0],id)
