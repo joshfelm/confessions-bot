@@ -11,7 +11,7 @@ for website in websites:
     i = 0
     print("Searching for new " + website + "...")
     # gather posts from website
-    for post in get_posts(website,pages=100,credentials=('bottruths@gmail.com','bottisonuh')):
+    for post in get_posts(website,pages=50,credentials=('bottruths@gmail.com','bottisonuh')):
         if i < 3000:
             try:
                 words = post['text'].split()
