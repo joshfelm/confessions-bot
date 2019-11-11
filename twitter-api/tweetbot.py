@@ -71,4 +71,5 @@ tweetout(tweets[0],id)
 
 # Check remaining tweets and notify if tweets are low
 if len(tweets) < 10:
+    notify = Notify()
     notify.send("Warning, only " + len(tweets) + " left in queue")
