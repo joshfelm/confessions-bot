@@ -1,4 +1,4 @@
-from facebook_scraper import get_posts
+#from facebook_scraper import get_posts
 import re
 from textgenrnn import textgenrnn
 import os.path
