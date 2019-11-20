@@ -80,6 +80,7 @@ train_cfg = {
 
 # The train function (comment this out if you don't want to train and only generate text)
 
+<<<<<<< HEAD
 #train_function(
 #    texts=texts,
 #    new_model=False,        # Change this to true to retrain model from scratch
@@ -96,6 +97,24 @@ train_cfg = {
 #    max_length=model_cfg['max_length'],
 #    dim_embeddings=100,
 #    word_level=model_cfg['word_level'])
+=======
+# train_function(
+#     texts=texts,
+#     new_model=False,        # Change this to true to retrain model from scratch
+#     num_epochs=train_cfg['num_epochs'],
+#     gen_epochs=train_cfg['gen_epochs'],
+#     batch_size=1024,
+#     train_size=train_cfg['train_size'],
+#     dropout=train_cfg['dropout'],
+#     validation=train_cfg['validation'],
+#     is_csv=train_cfg['is_csv'],
+#     rnn_layers=model_cfg['rnn_layers'],
+#     rnn_size=model_cfg['rnn_size'],
+#     rnn_bidirectional=model_cfg['rnn_bidirectional'],
+#     max_length=model_cfg['max_length'],
+#     dim_embeddings=100,
+#     word_level=model_cfg['word_level'])
+>>>>>>> 03589db6f33f0502006193334599b2fd7b4c5813
 
 # this temperature schedule cycles between 1 very unexpected token, 1 unexpected token, 2 expected tokens, repeat.
 # changing the temperature schedule can result in wildly different output!
