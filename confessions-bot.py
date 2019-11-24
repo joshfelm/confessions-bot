@@ -80,7 +80,7 @@ train_cfg = {
 
 # The train function (comment this out if you don't want to train and only generate text)
 
-<<<<<<< HEAD
+#<<<<<<< HEAD
 #train_function(
 #    texts=texts,
 #    new_model=False,        # Change this to true to retrain model from scratch
@@ -97,7 +97,7 @@ train_cfg = {
 #    max_length=model_cfg['max_length'],
 #    dim_embeddings=100,
 #    word_level=model_cfg['word_level'])
-=======
+#=======
 # train_function(
 #     texts=texts,
 #     new_model=False,        # Change this to true to retrain model from scratch
@@ -114,7 +114,7 @@ train_cfg = {
 #     max_length=model_cfg['max_length'],
 #     dim_embeddings=100,
 #     word_level=model_cfg['word_level'])
->>>>>>> 03589db6f33f0502006193334599b2fd7b4c5813
+#>>>>>>> 03589db6f33f0502006193334599b2fd7b4c5813
 
 # this temperature schedule cycles between 1 very unexpected token, 1 unexpected token, 2 expected tokens, repeat.
 # changing the temperature schedule can result in wildly different output!
