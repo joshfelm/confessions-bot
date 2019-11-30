@@ -122,10 +122,10 @@ temperature = [1.0, 0.5, 0.2, 0.7, 0.2, 0.2, 0.5]
 prefix = '\n'   # if you want each generated text to start with a given seed text
 
 if train_cfg['line_delimited']:
-  n = 1000
+  n = 2000
   max_gen_length = 60 if model_cfg['word_level'] else 300
 else:
-  n = 100
+  n = 200
   max_gen_length = 50 if model_cfg['word_level'] else 280  # max length = lenght of tweet
   
 gen_file = './gentext/gentext-'+str(datetime.datetime.now())+'.txt'
