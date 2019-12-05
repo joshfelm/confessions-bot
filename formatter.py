@@ -78,11 +78,11 @@ for file in glob.glob("./gentext/gentext*.txt"):
                     quit = True
         f.close()
         queue.close()
-bashcommit = 'git commit -am "updated tweets"'
+bashcommit = 'git commit -am "updated"'
 bashpush = "git push"
 process = subprocess.Popen(bashcommit.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()
 process = subprocess.Popen(bashpush.split(), stdout=subprocess.PIPE)
 output, error = process.communicate()
 notify = Notify()
-notify.send("Updated tweet queue with " + str(tweetnum) + " tweets.")
+# notify.send("Updated tweet queue with " + str(tweetnum) + " tweets.")
