@@ -1,7 +1,10 @@
 import glob, os
 import re
+import subprocess
 from os import path
+from notify_run import Notify
 
+tweetnum = 0
 for file in glob.glob("./gentext/gentext*.txt"):
     temp = str(file).split('/')
     filename = temp[len(temp) - 1]
@@ -70,8 +73,16 @@ for file in glob.glob("./gentext/gentext*.txt"):
                 response.lower()
                 if response == 'y':
                     queue.write(l)
+                    tweetnum+=1
                 if response == 'c':
                     quit = True
         f.close()
         queue.close()
-print("Done. DONT FORGET TO COMMIT AND PUSH CHANGES")
+bashcommit = 'git commit -am "updated tweets"'
+bashpush = "git push"
+process = subprocess.Popen(bashcommit.split(), stdout=subprocess.PIPE)
+output, error = process.communicate()
+process = subprocess.Popen(bashpush.split(), stdout=subprocess.PIPE)
+output, error = process.communicate()
+notify = Notify()
+notify.send("Updated tweet queue with " + str(tweetnum) + " tweets.")
