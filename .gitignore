@@ -1,4 +1,3 @@
-/posts/*
 /twitter-api/auth.py
 /gentext/*
 /twitter-api/__pycache__
