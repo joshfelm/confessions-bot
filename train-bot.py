@@ -11,6 +11,20 @@ import time
 import datetime
 from datetime import date
 
+filelist = []
+for file in glob.glob("./posts/*.txt"):
+    filelist.append(file)
+
+# for file in glob.glob("./posts/archive/*.txt"):
+#     filelist.append(file)
+
+texts = []
+
+for f in filelist:
+    fileop=open(f, "r")
+    if fileop.mode == 'r':
+        texts.append(fileop.read())
+
 tf.config.optimizer.set_jit(True)
 
 # train network
@@ -65,38 +79,19 @@ train_cfg = {
 
 # The train function (comment this out if you don't want to train and only generate text)
 
-#<<<<<<< HEAD
-#train_function(
-#    texts=texts,
-#    new_model=False,        # Change this to true to retrain model from scratch
-#    num_epochs=train_cfg['num_epochs'],
-#    gen_epochs=train_cfg['gen_epochs'],
-#    batch_size=1024,
-#    train_size=train_cfg['train_size'],
-#    dropout=train_cfg['dropout'],
-#    validation=train_cfg['validation'],
-#    is_csv=train_cfg['is_csv'],
-#    rnn_layers=model_cfg['rnn_layers'],
-#    rnn_size=model_cfg['rnn_size'],
-#   rnn_bidirectional=model_cfg['rnn_bidirectional'],
-#    max_length=model_cfg['max_length'],
-#    dim_embeddings=100,
-#    word_level=model_cfg['word_level'])
-#=======
-# train_function(
-#     texts=texts,
-#     new_model=False,        # Change this to true to retrain model from scratch
-#     num_epochs=train_cfg['num_epochs'],
-#     gen_epochs=train_cfg['gen_epochs'],
-#     batch_size=1024,
-#     train_size=train_cfg['train_size'],
-#     dropout=train_cfg['dropout'],
-#     validation=train_cfg['validation'],
-#     is_csv=train_cfg['is_csv'],
-#     rnn_layers=model_cfg['rnn_layers'],
-#     rnn_size=model_cfg['rnn_size'],
-#     rnn_bidirectional=model_cfg['rnn_bidirectional'],
-#     max_length=model_cfg['max_length'],
-#     dim_embeddings=100,
-#     word_level=model_cfg['word_level'])
-#>>>>>>> 03589db6f33f0502006193334599b2fd7b4c5813
+train_function(
+    texts=texts,
+    new_model=False,        # Change this to true to retrain model from scratch
+    num_epochs=train_cfg['num_epochs'],
+    gen_epochs=train_cfg['gen_epochs'],
+    batch_size=1024,
+    train_size=train_cfg['train_size'],
+    dropout=train_cfg['dropout'],
+    validation=train_cfg['validation'],
+    is_csv=train_cfg['is_csv'],
+    rnn_layers=model_cfg['rnn_layers'],
+    rnn_size=model_cfg['rnn_size'],
+   rnn_bidirectional=model_cfg['rnn_bidirectional'],
+    max_length=model_cfg['max_length'],
+    dim_embeddings=100,
+    word_level=model_cfg['word_level'])
